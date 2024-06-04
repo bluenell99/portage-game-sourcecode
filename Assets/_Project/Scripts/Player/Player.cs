@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(MovementBehaviour))]
 [RequireComponent(typeof(GroundDetector))]
-public class Player : Entity
+public class Player : IEntity
 {
     [SerializeField] private MovementBehaviour _movement;
     [SerializeField] private GroundDetector _groundDetector;
@@ -19,9 +19,8 @@ public class Player : Entity
 
     public bool IsGroundedAndMoving() => _movement.IsMoving && _groundDetector.IsGrounded;
 
-    public override void Awake()
+    public void Awake()
     {
-        base.Awake();
         ServiceManager.GetService<PlayerService>().SetPlayer(this);
     }
 
